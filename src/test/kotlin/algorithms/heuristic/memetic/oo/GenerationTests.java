@@ -1,17 +1,17 @@
-package heuristic.algorithms.oo;
+package algorithms.heuristic.memetic.oo;
 
+import algorithms.heuristic.matrix.builder.StaticMatricesInputs;
 import org.junit.jupiter.api.Test;
 
-import static heuristic.matrix.builder.StaticMatricesInputs.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class GenerationTests {
 
-    private static final int[][] MATRIX = THIRTY_POINTS_MATRIX;
-    private static final int[][] INDIVIDUALS = THIRTY_POINTS_MATRIX_FIRST_GENERATION_WITH_EIGHT_INDIVIDUALS;
-    private static final int[] BEST_INDIVIDUAL = THIRTY_POINTS_MATRIX_BEST_INDIVIDUAL;
+    private static final int[][] MATRIX = StaticMatricesInputs.THIRTY_POINTS_MATRIX;
+    private static final int[][] INDIVIDUALS = StaticMatricesInputs.THIRTY_POINTS_MATRIX_FIRST_GENERATION_WITH_EIGHT_INDIVIDUALS;
+    private static final int[] BEST_INDIVIDUAL = StaticMatricesInputs.THIRTY_POINTS_MATRIX_BEST_INDIVIDUAL;
 
-    private static final int FITNESS_FROM_BEST_INDIVIDUAL = THIRTY_POINTS_MATRIX_FITNESS_FROM_BEST_INDIVIDUAL;
+    private static final int FITNESS_FROM_BEST_INDIVIDUAL = StaticMatricesInputs.THIRTY_POINTS_MATRIX_FITNESS_FROM_BEST_INDIVIDUAL;
     private static final int[] NEW_BEST_INDIVIDUAL = new int[]
             {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29};
     private static final int FITNESS_FROM_NEW_BEST_INDIVIDUAL = 465;

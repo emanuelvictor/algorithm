@@ -1,8 +1,8 @@
-package heuristic.matrix;
+package algorithms.heuristic.matrix;
 
 
-import heuristic.algorithms.oo.Generation;
-import heuristic.algorithms.oo.Individual;
+import algorithms.heuristic.memetic.oo.Generation;
+import algorithms.heuristic.memetic.oo.Individual;
 import org.springframework.util.Assert;
 
 public class Input {

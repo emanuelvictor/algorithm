@@ -1,9 +1,8 @@
-import heuristic.algorithms.oo.Generation
-import heuristic.algorithms.oo.Individual
-import heuristic.algorithms.oo.Memetic
-import heuristic.matrix.Input
-import heuristic.matrix.builder.MatricesGeneratorV2
-import heuristic.matrix.builder.StaticMatricesInputs.THIRTY_POINTS_MATRIX
+import algorithms.heuristic.memetic.oo.Generation
+import algorithms.heuristic.memetic.oo.Individual
+import algorithms.heuristic.memetic.oo.Memetic
+import algorithms.heuristic.matrix.Input
+import algorithms.heuristic.matrix.builder.MatricesGeneratorV2
 
 fun main() {
 //    val matrix = THIRTY_POINTS_MATRIX
@@ -33,7 +32,12 @@ fun main() {
 //    memetic.execute()
 
     val matrix = MatricesGeneratorV2.generateControlledMatrixMatrix(80)
-    val firstPopulation = Generation(MatricesGeneratorV2.generateRandomPopulation(matrix, 20).map { Individual(it, matrix) }.toTypedArray());
+    val firstPopulation = Generation(
+        MatricesGeneratorV2.generateRandomPopulation(
+            matrix,
+            20
+        ).map { Individual(it, matrix) }.toTypedArray()
+    );
     val fitness = MatricesGeneratorV2.extractTheBestFitnessFromContorlledMatrix(matrix)
 
     val input = Input.builder()

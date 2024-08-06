@@ -1,4 +1,4 @@
-package heuristic.matrix.builder;
+package algorithms.heuristic.matrix.builder;
 
 import java.util.Arrays;
 import java.util.Random;

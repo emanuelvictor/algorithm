@@ -1,4 +1,4 @@
-package heuristic.matrix.builder;
+package algorithms.heuristic.matrix.builder;
 
 public class StaticMatricesInputs {
 

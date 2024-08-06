@@ -1,4 +1,4 @@
-package heuristic.algorithms.oo;
+package algorithms.heuristic.memetic.oo;
 
 public class Individual {
 

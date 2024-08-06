@@ -1,7 +1,7 @@
-package heuristic.matrix;
+package algorithms.heuristic.matrix;
 
-import heuristic.algorithms.oo.Generation;
-import heuristic.matrix.builder.MatricesGeneratorV2;
+import algorithms.heuristic.memetic.oo.Generation;
+import algorithms.heuristic.matrix.builder.MatricesGeneratorV2;
 
 public final class InputBuilder {
 

@@ -1,6 +1,6 @@
-package heuristic.algorithms.oo;
+package algorithms.heuristic.memetic.oo;
 
-import heuristic.matrix.Input;
+import algorithms.heuristic.matrix.Input;
 
 import java.util.Arrays;
 import java.util.Random;

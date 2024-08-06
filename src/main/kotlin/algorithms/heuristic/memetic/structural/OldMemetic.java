@@ -1,6 +1,6 @@
-package heuristic.algorithms.structural.memetic;
+package algorithms.heuristic.memetic.structural;
 
-import heuristic.matrix.builder.MatrixGenerator;
+import algorithms.heuristic.matrix.builder.MatrixGenerator;
 
 import java.util.Arrays;
 import java.util.Random;
