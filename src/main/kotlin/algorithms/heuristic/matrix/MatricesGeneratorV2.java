@@ -112,7 +112,7 @@ public final class MatricesGeneratorV2 {
     }
 
     // TODO fazer a somatória entre 1 até o size da matrix.
-    public static int extractTheBestFitnessFromContorlledMatrix(final int[][] matrix) {
+    public static int extractTheBestFitnessFromControlledMatrix(final int[][] matrix) {
 
         int fitness = matrix[matrix.length - 1][matrix.length - 1];
 

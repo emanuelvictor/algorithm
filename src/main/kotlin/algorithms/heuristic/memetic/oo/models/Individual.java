@@ -12,7 +12,7 @@ public class Individual {
         this.calculateFitness();
     }
 
-    // TODO must be tested
+    // TODO must have unity test
     public void calculateFitness(){
         fitness = calculateFitness(chromosomes, matrix);
     }

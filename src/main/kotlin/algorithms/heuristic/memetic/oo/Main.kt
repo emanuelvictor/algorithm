@@ -31,7 +31,7 @@ fun main() {
 
     val matrix = MatricesGeneratorV2.generateControlledMatrixMatrix(80)
     val firstPopulation = MatricesGeneratorV2.generateRandomPopulation(matrix, 2)
-    val fitness = MatricesGeneratorV2.extractTheBestFitnessFromContorlledMatrix(matrix)
+    val fitness = MatricesGeneratorV2.extractTheBestFitnessFromControlledMatrix(matrix)
 
     val ooMemeticInput = Input.builder()
         .matrix(matrix)

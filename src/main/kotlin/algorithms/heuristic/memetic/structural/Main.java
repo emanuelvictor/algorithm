@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         var matrix = MatricesGeneratorV2.generateControlledMatrixMatrix(80);
         var firstPopulation = MatricesGeneratorV2.generateRandomPopulation(matrix, 2);
-        var fitness = MatricesGeneratorV2.extractTheBestFitnessFromContorlledMatrix(matrix);
+        var fitness = MatricesGeneratorV2.extractTheBestFitnessFromControlledMatrix(matrix);
 
         var input = Input.builder()
                 .matrix(matrix)

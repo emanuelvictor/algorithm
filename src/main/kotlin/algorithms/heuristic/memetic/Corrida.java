@@ -17,7 +17,7 @@ public class Corrida {
 
         var matrix = MatricesGeneratorV2.generateControlledMatrixMatrix(80);
         var rawFirstGeneration = MatricesGeneratorV2.generateRandomPopulation(matrix, 2);
-        var fitness = MatricesGeneratorV2.extractTheBestFitnessFromContorlledMatrix(matrix);
+        var fitness = MatricesGeneratorV2.extractTheBestFitnessFromControlledMatrix(matrix);
 
         ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(40);
 
