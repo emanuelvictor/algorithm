@@ -1,11 +1,11 @@
 package algorithms.heuristic.memetic.structural;
 
-import algorithms.heuristic.matrix.builder.MatrixGenerator;
+import algorithms.heuristic.matrix.MatrixGenerator;
 
 import java.util.Arrays;
 import java.util.Random;
 
-public class OldMemetic {
+public class OldStructuralMemetic {
 
     private int[][] matrix;
 
@@ -16,12 +16,12 @@ public class OldMemetic {
 
     private int[] melhor;
 
-    public OldMemetic() {
+    public OldStructuralMemetic() {
         this.matrix = MatrixGenerator.getInstance().getMatrix();
         this.fitnessToFind = MatrixGenerator.getInstance().getFitness();
     }
 
-    public OldMemetic(final int[][] matrix, final int fitnessToFind) {
+    public OldStructuralMemetic(final int[][] matrix, final int fitnessToFind) {
         this.matrix = matrix;
         this.fitnessToFind = fitnessToFind;
     }

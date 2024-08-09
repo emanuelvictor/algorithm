@@ -1,8 +1,6 @@
-import algorithms.heuristic.memetic.oo.Generation
-import algorithms.heuristic.memetic.oo.Individual
-import algorithms.heuristic.memetic.oo.Memetic
-import algorithms.heuristic.matrix.Input
-import algorithms.heuristic.matrix.builder.MatricesGeneratorV2
+import algorithms.heuristic.Input
+import algorithms.heuristic.matrix.MatricesGeneratorV2
+import algorithms.heuristic.memetic.oo.OOMemetic
 
 fun main() {
 //    val matrix = THIRTY_POINTS_MATRIX
@@ -32,21 +30,16 @@ fun main() {
 //    memetic.execute()
 
     val matrix = MatricesGeneratorV2.generateControlledMatrixMatrix(80)
-    val firstPopulation = Generation(
-        MatricesGeneratorV2.generateRandomPopulation(
-            matrix,
-            20
-        ).map { Individual(it, matrix) }.toTypedArray()
-    );
+    val firstPopulation = MatricesGeneratorV2.generateRandomPopulation(matrix, 2)
     val fitness = MatricesGeneratorV2.extractTheBestFitnessFromContorlledMatrix(matrix)
 
-    val input = Input.builder()
+    val ooMemeticInput = Input.builder()
         .matrix(matrix)
-        .firstPopulation(firstPopulation) //  MENOR O TAMANHO DA POPULAÇÃO MAIS GERAÇÕES, MENOR PROCESSAMENTO ENTRE AS GERAÇÕES, MENOR O TEMPO
+        .firstGeneration(firstPopulation) //  MENOR O TAMANHO DA POPULAÇÃO MAIS GERAÇÕES, MENOR PROCESSAMENTO ENTRE AS GERAÇÕES, MENOR O TEMPO
         .fitnessToFind(fitness)
         .build()
 
-    val memetic = Memetic(input)
-    memetic.execute()
+    val ooMemetic = OOMemetic(ooMemeticInput)
+    ooMemetic.execute()
 
 }

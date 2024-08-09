@@ -1,4 +1,4 @@
-package algorithms.heuristic.memetic.oo;
+package algorithms.heuristic;
 
 @FunctionalInterface
 public interface Algorithm {

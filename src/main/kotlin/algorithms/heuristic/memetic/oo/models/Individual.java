@@ -1,4 +1,4 @@
-package algorithms.heuristic.memetic.oo;
+package algorithms.heuristic.memetic.oo.models;
 
 public class Individual {
 
@@ -23,6 +23,10 @@ public class Individual {
             fitness = fitness + matrix[chromosome[j]][chromosome[j == chromosome.length - 1 ? 0 : j + 1]];
         }
         return fitness;
+    }
+
+    public void setFitness(int fitness) {
+        this.fitness = fitness;
     }
 
     public int getFitness() {

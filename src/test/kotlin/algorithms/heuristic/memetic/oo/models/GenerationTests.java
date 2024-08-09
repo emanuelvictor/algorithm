@@ -1,6 +1,6 @@
-package algorithms.heuristic.memetic.oo;
+package algorithms.heuristic.memetic.oo.models;
 
-import algorithms.heuristic.matrix.builder.StaticMatricesInputs;
+import algorithms.heuristic.matrix.StaticMatricesInputs;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

@@ -3,7 +3,7 @@
 package algorithms.heuristic.genetic.structural;
 
 
-import algorithms.heuristic.matrix.builder.MatrixGenerator;
+import algorithms.heuristic.matrix.MatrixGenerator;
 import org.springframework.util.Assert;
 
 import java.util.Arrays;

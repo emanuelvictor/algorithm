@@ -1,102 +1,112 @@
-package algorithms.heuristic.memetic.oo;
+package algorithms.heuristic.memetic.structural;
 
-import algorithms.heuristic.matrix.Input;
 
+import algorithms.heuristic.Input;
+
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Memetic implements Algorithm {
+public class StructuralMemetic {
 
     private final int[][] matrix;
-    private final Generation generation;
+    private final int[][] generation;
     private final int fitnessToFind;
+    private final LocalDateTime initDate = LocalDateTime.now();
 
-    public Memetic(final Input input) {
+    public StructuralMemetic(final Input input) {
         this.matrix = input.getMatrix();
         this.fitnessToFind = input.getFitnessToFind();
-        this.generation = input.getGeneration();
+        this.generation = input.getFirstGeneration().clone();
     }
 
-    @Override
     public void execute() {
         execute(generation);
     }
 
-    private void execute(Generation generation) {
-        Individual latestBest = generation.getBestIndividual();
+    private void execute(int[][] population) {
+        int[] best = sort(population, calculateFitness(population, matrix))[0];
 
         //Variável auxiliar para guardar o melhor da população anterior anterior.
+        int melhorFitnessAnterior = calculateFitness(best, matrix);
         int indexOfPopulation = 1;
 
-        while (latestBest.getFitness() > fitnessToFind) {
+        while (!foundTheBestGlobalFitness(population, matrix, fitnessToFind)) {
 
-            generation = jump(generation, matrix);
+            population = jump(population, matrix);
 
-            generation = learn(generation, matrix);
+            population = learn(population, matrix);
+
+            //Variável auxiliar para não duplicar o processo de cálculo do fitness
+            final int currentBest = calculateFitness(best, matrix);
 
             //TODO gambiarrona para elitizar o melhor e o algorithm não desaprender
-            if (generation.getBestFitness() <= latestBest.getFitness()) {
-                if (generation.getBestFitness() < latestBest.getFitness())
-                    imprimir(indexOfPopulation, generation.getBestIndividual());
-                latestBest = new Individual(generation.getBestIndividual().getChromosomes(), matrix);
+            if (calculateFitness(sort(population, calculateFitness(population, matrix))[0], matrix) <= currentBest) {
+                System.arraycopy(population[0], 0, best, 0, population[0].length);
             } else {
-                generation.setBestIndividual(new Individual(latestBest.getChromosomes(), matrix));
+                System.arraycopy(best, 0, population[0], 0, population[0].length);
             }
-
+            //Se o fitness do melhor indivíduo encontrado for melhor que o anterior, imprime-o
+            if (currentBest < melhorFitnessAnterior) {
+                melhorFitnessAnterior = calculateFitness(best, matrix);
+//                imprimir(null, sort(population, calculateFitness(population, matrix))[0], matrix);
+//                System.out.println(" = " + calcularFitness(ordenar(population, calcularFitness(population, matrix))[0], matrix));
+            }
             indexOfPopulation++;
-            if (indexOfPopulation % 50 == 0) {
-//                imprimir(indexOfPopulation, generation.getBestIndividual());
+            if(indexOfPopulation % 10000 == 0){
+                imprimir(indexOfPopulation, sort(population, calculateFitness(population, matrix))[0], matrix);
             }
         }
-        imprimir(indexOfPopulation, generation.getBestIndividual());
+        imprimir(indexOfPopulation, sort(population, calculateFitness(population, matrix))[0], matrix);
+        System.out.println("Structured Memetic Init date: " + initDate);
+        System.out.println("Structured Memetic Final date: " + LocalDateTime.now());
     }
 
     private static boolean foundTheBestGlobalFitness(final int[][] population, final int[][] matrix, final int fitness) {
         return calculateFitness(population, matrix)[0] <= fitness;
     }
 
-    private static Generation jump(final Generation generation, final int[][] matrix) {
-        final Individual currentBestIndividual = generation.getBestIndividual();
-        final Generation newGeneration = generateRandomGeneration(generation.getIndividuals().length, matrix);
-        newGeneration.setBestIndividual(currentBestIndividual);
-        return newGeneration;
+    private static int[][] jump(final int[][] population, final int[][] matrix) {
+        int[] bestChromosome = sort(population, calculateFitness(population, matrix))[0];
+        final int[][] newPopulation = generateRandomPopulation(population.length, matrix);
+        newPopulation[newPopulation.length - 1] = bestChromosome;
+        return sort(newPopulation, calculateFitness(newPopulation, matrix));
     }
 
-    public static Generation learn(Generation generation, int[][] matrix) {
+    public static int[][] learn(int[][] population, int[][] matrix) {
 
 //        int[] fitness = calculateFitness(population, matrix);
 
 //        sort(population, fitness);
 
         final int m = 0; //roulette(fitness);
+
         //Percorrendo toda a população
-        for (Individual individual : generation.getIndividuals()) {
-            for (int i = 0; i < individual.getChromosomes().length; i++) { // TODO não sei pra que serve, mas melhora muito o desempenho. Ah acho que é para função de conversão.
+        for (int n = 0; n < population.length; n++) {
+            for (int i = 1; i < population.length; i++) {
                 //Percorrendo o mellhor
-                final Individual bestIndividual = generation.getBestIndividual();
-                for (int c = 0; c < bestIndividual.getChromosomes().length - 1; c++) {
+                for (int c = 0; c < population[m].length - 1; c++) {
                     //Percorrendo o indivíduo da população
-                    final int custoA = calculateFitness(bestIndividual.getChromosomes()[c], bestIndividual.getChromosomes()[c + 1], matrix);
-                    for (int j = 0; j < individual.getChromosomes().length - 1; j++) {
-                        if (individual.getChromosomes()[j] == bestIndividual.getChromosomes()[c]) {
-                            final int custoB = calculateFitness(individual.getChromosomes()[j], individual.getChromosomes()[j + 1], matrix);
+                    final int custoA = calculateFitness(population[m][c], population[m][c + 1], matrix);
+                    for (int j = 0; j < population[i].length - 1; j++) {
+                        if (population[i][j] == population[m][c]) {
+                            final int custoB = calculateFitness(population[i][j], population[i][j + 1], matrix);
                             if (custoA < custoB) {
-                                for (int k = 0; k < individual.getChromosomes().length; k++) {
-                                    if (individual.getChromosomes()[k] == bestIndividual.getChromosomes()[c + 1]) {
-                                        individual.getChromosomes()[k] = individual.getChromosomes()[j + 1];
+                                for (int k = 0; k < population[i].length; k++) {
+                                    if (population[i][k] == population[m][c + 1]) {
+                                        population[i][k] = population[i][j + 1];
                                         break;
                                     }
                                 }
-                                individual.getChromosomes()[j + 1] = bestIndividual.getChromosomes()[c + 1];
+                                population[i][j + 1] = population[m][c + 1];
                             } else if (custoB < custoA) {
-                                for (int k = 0; k < bestIndividual.getChromosomes().length; k++) {
-                                    if (bestIndividual.getChromosomes()[k] == individual.getChromosomes()[j + 1]) {
-                                        bestIndividual.getChromosomes()[k] = bestIndividual.getChromosomes()[c + 1];
-                                        // bestIndividual.setFitness(bestIndividual.getFitness() - (custoA - custoB)); TODO put it in setChromosome
+                                for (int k = 0; k < population[m].length; k++) {
+                                    if (population[m][k] == population[i][j + 1]) {
+                                        population[m][k] = population[m][c + 1];
                                         break;
                                     }
                                 }
-                                bestIndividual.getChromosomes()[c + 1] = individual.getChromosomes()[j + 1];
+                                population[m][c + 1] = population[i][j + 1];
                             }
                             break;
                         }
@@ -104,16 +114,10 @@ public class Memetic implements Algorithm {
                 }
             }
         }
-
-        // TODO workaround to recalculate fitness
-        for (Individual individual : generation.getIndividuals()) {
-            individual.calculateFitness();
-        }
-
-        return new Generation(generation.getIndividuals());
+        return sort(population, calculateFitness(population, matrix));
     }
 
-    private static Generation generateRandomGeneration(final int sizeOfPopulation, final int[][] matrix) {
+    private static int[][] generateRandomPopulation(final int sizeOfPopulation, final int[][] matrix) {
 
         int[][] routes = new int[sizeOfPopulation][matrix.length];
 
@@ -136,12 +140,7 @@ public class Memetic implements Algorithm {
             }
         }
 
-        final Individual[] individuals = new Individual[routes.length];
-        for (int i = 0; i < routes.length; i++) {
-            individuals[i] = new Individual(routes[i], matrix);
-        }
-
-        return new Generation(individuals);
+        return sort(routes, calculateFitness(routes, matrix));
     }
 
     private static void shuffle(final int tam, final int[] route, int[] auxRoute) {
@@ -170,6 +169,7 @@ public class Memetic implements Algorithm {
         return auxArray;
     }
 
+    // TODO it's wrong
     private static int[] calculateFitness(final int[][] population, final int[][] matrix) {
         int[] fitness = new int[population.length];
         for (int i = 0; i < population.length; i++) {
@@ -228,18 +228,8 @@ public class Memetic implements Algorithm {
 //        }
 //    }
 
-    private void imprimir(final int indexOfPopulation, Individual individual) {
-        System.out.println(indexOfPopulation + "|" + fitnessToFind + "|" + individual.getFitness());
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("    ");
-        for (int j : individual.getChromosomes()) {
-            stringBuilder.append(" ").append(j);
-        }
-        System.out.println(stringBuilder);
-    }
-
     private void imprimir(final int indexOfPopulation, int[] rota, int[][] matrix) {
-        System.out.println(indexOfPopulation + "|" + fitnessToFind + "|" + calculateFitness(rota, matrix));
+        System.out.println("Structured "+ indexOfPopulation + "|" + fitnessToFind + "|" + calculateFitness(rota, matrix));
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("    ");
         for (int j : rota) {
