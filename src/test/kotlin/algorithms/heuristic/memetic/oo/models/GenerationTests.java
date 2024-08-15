@@ -36,7 +36,7 @@ public class GenerationTests {
 
         generation.setBestIndividual(newBestIndividual);
 
-        assertThat(generation.getIndividuals()).isEqualTo(individuals);
+        assertThat(generation.getIndividuals()).isNotEqualTo(individuals);
         assertThat(generation.getBestIndividual().getChromosomes()).isEqualTo(NEW_BEST_INDIVIDUAL);
         assertThat(generation.getChromosomesFromBestIndividual()).isEqualTo(NEW_BEST_INDIVIDUAL);
         assertThat(generation.getBestFitness()).isEqualTo(FITNESS_FROM_NEW_BEST_INDIVIDUAL);

@@ -1,4 +1,4 @@
-package algorithms.heuristic.genetic.structural;
+package algorithms.heuristic.genetic.structured;
 
 /**
  * Algoritmo Genético implementado por Emanuel Victor e Haroldo Ramirez em 29/09/14.

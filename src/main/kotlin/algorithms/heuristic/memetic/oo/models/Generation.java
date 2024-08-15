@@ -9,11 +9,11 @@ public class Generation {
         for (int i = 0; i < tempIndividuals.length; i++) {
             tempIndividuals[i] = new Individual(individuals[i].clone(), matrix);
         }
-        this.individuals = sort(tempIndividuals);
+        this.individuals = sort(tempIndividuals).clone();
     }
 
     public Generation(Individual[] individuals) {
-        this.individuals = sort(individuals);
+        this.individuals = sort(individuals).clone();
     }
 
     public Individual[] getIndividuals() {

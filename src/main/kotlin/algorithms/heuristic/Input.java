@@ -28,7 +28,11 @@ public class Input {
     }
 
     public int[][] getFirstGeneration() {
-        return firstGeneration;
+        final int[][] generation = new int[firstGeneration.length][matrix.length];
+        for (int i = 0; i < firstGeneration.length; i++) {
+            System.arraycopy(firstGeneration[i], 0, generation[i], 0, firstGeneration[i].length);
+        }
+        return generation;
     }
 
     public void setFirstGeneration(int[][] firstGeneration) {

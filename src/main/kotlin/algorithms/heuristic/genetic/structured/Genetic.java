@@ -1,6 +1,6 @@
 
 
-package algorithms.heuristic.genetic.structural;
+package algorithms.heuristic.genetic.structured;
 
 
 import algorithms.heuristic.matrix.MatrixGenerator;

@@ -1,4 +1,4 @@
-package algorithms.heuristic.memetic.structural;
+package algorithms.heuristic.memetic.structured;
 
 import algorithms.heuristic.Input;
 import algorithms.heuristic.matrix.MatricesGeneratorV2;
@@ -6,9 +6,9 @@ import algorithms.heuristic.matrix.MatricesGeneratorV2;
 public class Main {
 
     public static void main(String[] args) {
-        var matrix = MatricesGeneratorV2.generateControlledMatrixMatrix(80);
+        var matrix = MatricesGeneratorV2.generateSupervisedMatrixMatrix(80);
         var firstPopulation = MatricesGeneratorV2.generateRandomPopulation(matrix, 2);
-        var fitness = MatricesGeneratorV2.extractTheBestFitnessFromControlledMatrix(matrix);
+        var fitness = MatricesGeneratorV2.extractTheBestFitnessFromSupervisedMatrix(matrix);
 
         var input = Input.builder()
                 .matrix(matrix)
@@ -16,7 +16,7 @@ public class Main {
                 .fitnessToFind(fitness)
                 .build();
 
-        var memetic = new StructuralMemetic(input);
+        var memetic = new StructuredMemetic(input);
         memetic.execute();
     }
 }

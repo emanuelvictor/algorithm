@@ -1,5 +1,7 @@
 package algorithms.heuristic.memetic.oo.models;
 
+import algorithms.heuristic.Utils;
+
 public class Individual {
 
     private final int[][] matrix;
@@ -13,7 +15,7 @@ public class Individual {
     }
 
     // TODO must have unity test
-    public void calculateFitness(){
+    public void calculateFitness() {
         fitness = calculateFitness(chromosomes, matrix);
     }
 

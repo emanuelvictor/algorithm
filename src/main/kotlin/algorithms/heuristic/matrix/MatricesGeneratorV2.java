@@ -80,7 +80,7 @@ public final class MatricesGeneratorV2 {
         return fitness;
     }
 
-    public static int[][] generateControlledMatrixMatrix(final int sizeOfMatrix) {
+    public static int[][] generateSupervisedMatrixMatrix(final int sizeOfMatrix) {
 
         final int[][] matrix = new int[sizeOfMatrix][sizeOfMatrix];
         final Random random = new Random();
@@ -112,7 +112,7 @@ public final class MatricesGeneratorV2 {
     }
 
     // TODO fazer a somatória entre 1 até o size da matrix.
-    public static int extractTheBestFitnessFromControlledMatrix(final int[][] matrix) {
+    public static int extractTheBestFitnessFromSupervisedMatrix(final int[][] matrix) {
 
         int fitness = matrix[matrix.length - 1][matrix.length - 1];
 

@@ -1,30 +1,33 @@
-package algorithms.heuristic.memetic.structural;
+package algorithms.heuristic.memetic.structured;
 
 
+import algorithms.heuristic.Algorithm;
 import algorithms.heuristic.Input;
+import algorithms.heuristic.Output;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Random;
 
-public class StructuralMemetic {
+import static algorithms.heuristic.Utils.*;
+
+public class StructuredMemetic implements Algorithm {
 
     private final int[][] matrix;
     private final int[][] generation;
     private final int fitnessToFind;
     private final LocalDateTime initDate = LocalDateTime.now();
 
-    public StructuralMemetic(final Input input) {
+    public StructuredMemetic(final Input input) {
         this.matrix = input.getMatrix();
         this.fitnessToFind = input.getFitnessToFind();
-        this.generation = input.getFirstGeneration().clone();
+        this.generation = input.getFirstGeneration();
     }
 
-    public void execute() {
-        execute(generation);
+    public Output execute() {
+        return execute(generation);
     }
 
-    private void execute(int[][] population) {
+    private Output execute(int[][] population) {
         int[] best = sort(population, calculateFitness(population, matrix))[0];
 
         //Variável auxiliar para guardar o melhor da população anterior anterior.
@@ -54,12 +57,12 @@ public class StructuralMemetic {
             }
             indexOfPopulation++;
             if(indexOfPopulation % 10000 == 0){
-                imprimir(indexOfPopulation, sort(population, calculateFitness(population, matrix))[0], matrix);
+//                imprimir(indexOfPopulation, sort(population, calculateFitness(population, matrix))[0], matrix);
             }
         }
-        imprimir(indexOfPopulation, sort(population, calculateFitness(population, matrix))[0], matrix);
-        System.out.println("Structured Memetic Init date: " + initDate);
-        System.out.println("Structured Memetic Final date: " + LocalDateTime.now());
+//        imprimir(indexOfPopulation, sort(population, calculateFitness(population, matrix))[0], matrix);
+        Duration duration = Duration.between(initDate, LocalDateTime.now());
+        return new Output(duration);
     }
 
     private static boolean foundTheBestGlobalFitness(final int[][] population, final int[][] matrix, final int fitness) {
@@ -75,11 +78,7 @@ public class StructuralMemetic {
 
     public static int[][] learn(int[][] population, int[][] matrix) {
 
-//        int[] fitness = calculateFitness(population, matrix);
-
-//        sort(population, fitness);
-
-        final int m = 0; //roulette(fitness);
+        final int m = 0;
 
         //Percorrendo toda a população
         for (int n = 0; n < population.length; n++) {
@@ -116,117 +115,6 @@ public class StructuralMemetic {
         }
         return sort(population, calculateFitness(population, matrix));
     }
-
-    private static int[][] generateRandomPopulation(final int sizeOfPopulation, final int[][] matrix) {
-
-        int[][] routes = new int[sizeOfPopulation][matrix.length];
-
-        //Inicializando população inicial
-        for (int k = 0; k < sizeOfPopulation; k++) {
-
-            int[] auxRoute = new int[matrix.length];
-            for (int i = 0; i < matrix.length; i++) {
-                auxRoute[i] = i;
-            }
-
-            int[] route = new int[auxRoute.length];
-
-            shuffle(route.length, route, auxRoute);
-
-            if (!isContained(routes, route)) {
-                routes[k] = route;
-            } else {
-                k--;
-            }
-        }
-
-        return sort(routes, calculateFitness(routes, matrix));
-    }
-
-    private static void shuffle(final int tam, final int[] route, int[] auxRoute) {
-        // Shuffling
-        for (int i = 0; i < tam; i++) {
-            int random;
-            do {
-                random = new Random().nextInt(tam - i);
-            } while (random == i);
-
-            route[i] = auxRoute[random];
-            auxRoute = fillWithoutRandom(auxRoute, random);
-        }
-    }
-
-    private static int[] fillWithoutRandom(final int[] arrayOfIndex, final int random) {
-        int[] auxArray = new int[arrayOfIndex.length - 1];
-        int cont = 0;
-        for (int j = 0; j < arrayOfIndex.length; j++) {
-            if (j == random) {
-                continue;
-            }
-            auxArray[cont] = arrayOfIndex[j];
-            cont++;
-        }
-        return auxArray;
-    }
-
-    // TODO it's wrong
-    private static int[] calculateFitness(final int[][] population, final int[][] matrix) {
-        int[] fitness = new int[population.length];
-        for (int i = 0; i < population.length; i++) {
-            fitness[i] = calculateFitness(population[i], matrix);
-        }
-        return fitness;
-    }
-
-    private static int calculateFitness(final int[] chromosome, final int[][] matrix) {
-        int fitness = 0;
-        for (int j = 0; j < chromosome.length; j++) {
-            fitness = fitness + matrix[chromosome[j]][chromosome[j == chromosome.length - 1 ? 0 : j + 1]];
-        }
-        return fitness;
-    }
-
-    private static int calculateFitness(int cidade1, int cidade2, int[][] matrix) {
-        return matrix[cidade1][cidade2];
-    }
-
-    private static int[][] sort(final int[][] population, final int[] fitness) {
-        // ordenando
-        int i, i2;
-        for (i = 0; i < population.length; i++) {
-            for (i2 = i; i2 < population.length; i2++) {
-                if (fitness[i] > fitness[i2]) {
-                    int vTmp = fitness[i];
-                    fitness[i] = fitness[i2];
-                    fitness[i2] = vTmp;
-
-                    int[] vvTmp = population[i];
-                    population[i] = population[i2];
-                    population[i2] = vvTmp;
-                }
-            }
-        }
-        return population;
-    }
-
-    private static boolean isContained(int[][] population, int[] individuo) {
-        for (int[] auxiliar : population) {
-            if (Arrays.equals(auxiliar, individuo)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-//    private static void imprimir(int[][] population, int[] fitness, int[][] matrix) {
-//        for (int j = 0; j < population.length; j++) {
-//            System.out.print("Rota " + j + " = ");
-//            for (int i = 0; i < matrix.length; i++) {
-//                System.out.print(" " + population[j][i] + " ");
-//            }
-//            System.out.println(" fitness = " + fitness[j]);
-//        }
-//    }
 
     private void imprimir(final int indexOfPopulation, int[] rota, int[][] matrix) {
         System.out.println("Structured "+ indexOfPopulation + "|" + fitnessToFind + "|" + calculateFitness(rota, matrix));

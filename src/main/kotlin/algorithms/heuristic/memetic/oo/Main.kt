@@ -29,9 +29,9 @@ fun main() {
 //    val memetic = Memetic(input)
 //    memetic.execute()
 
-    val matrix = MatricesGeneratorV2.generateControlledMatrixMatrix(80)
+    val matrix = MatricesGeneratorV2.generateSupervisedMatrixMatrix(80)
     val firstPopulation = MatricesGeneratorV2.generateRandomPopulation(matrix, 2)
-    val fitness = MatricesGeneratorV2.extractTheBestFitnessFromControlledMatrix(matrix)
+    val fitness = MatricesGeneratorV2.extractTheBestFitnessFromSupervisedMatrix(matrix)
 
     val ooMemeticInput = Input.builder()
         .matrix(matrix)
