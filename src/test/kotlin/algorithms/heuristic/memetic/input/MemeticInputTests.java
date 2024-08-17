@@ -1,15 +1,16 @@
-package algorithms.heuristic.aid;
+package algorithms.heuristic.memetic.input;
 
+import algorithms.heuristic.aid.Input;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class InputTests {
+public class MemeticInputTests {
 
     @Test
     public void mustCreateInputWithDefaultValues() {
-        final Input input = Input.builder().build();
+        final Input input = Input.memeticInputBuilder().build();
 
         assertThat(input.getFitnessToFind()).isNotNull();
         assertThat(input.getFirstGeneration()).isNotNull();
@@ -20,7 +21,7 @@ public class InputTests {
     public void mustCreateInputWithCustomMatrixAndWithoutFitnessToFind() {
         final int[][] matrix = new int[][]{{1, 2, 3}, {1, 2, 3}, {1, 2, 3}};
 
-        final Input input = Input.builder().matrix(matrix).build();
+        final Input input = Input.memeticInputBuilder().matrix(matrix).build();
 
         assertThat(input.getFitnessToFind()).isNull();
         assertThat(input.getFirstGeneration()).isNotNull();
@@ -34,7 +35,7 @@ public class InputTests {
         final int sizeOfFirstPopulation = 3;
         final int[][] firstPopulation = new int[][]{{1, 2, 3}, {1, 2, 3}, {1, 2, 3}};
 
-        final Input input = Input.builder()
+        final Input input = Input.memeticInputBuilder()
                 .matrix(matrix)
                 .fitnessToFind(fitnessToFind)
                 .sizeOfFirstGeneration(sizeOfFirstPopulation)
@@ -53,7 +54,7 @@ public class InputTests {
         final int fitnessToFind = 3;
         final int[][] firstPopulation = new int[][]{{1, 2, 3}, {1, 2, 3, 4}, {1, 2, 3}};
 
-        final Throwable throwable = Assertions.catchThrowable(() -> Input.builder()
+        final Throwable throwable = Assertions.catchThrowable(() -> Input.memeticInputBuilder()
                 .matrix(matrix).fitnessToFind(fitnessToFind).firstGeneration(firstPopulation)
                 .build());
 
@@ -65,7 +66,7 @@ public class InputTests {
     public void inputCannotBeCreatedWithFitnessToFindEqualsToZero() {
         final int[][] matrix = new int[][]{{1, 2, 3}, {1, 2, 3}, {1, 2, 3}};
 
-        final Throwable throwable = Assertions.catchThrowable(() -> Input.builder().matrix(matrix).fitnessToFind(0).build());
+        final Throwable throwable = Assertions.catchThrowable(() -> Input.memeticInputBuilder().matrix(matrix).fitnessToFind(0).build());
 
         assertThat(throwable.getMessage()).isEqualTo("fitnessToFind cannot be less than 0");
     }
@@ -75,13 +76,13 @@ public class InputTests {
     public void inputCannotBeCreatedWithFitnessToFindLessThanZero() {
         final int[][] matrix = new int[][]{{1, 2, 3}, {1, 2, 3}, {1, 2, 3}};
 
-        final Throwable throwable = Assertions.catchThrowable(() -> Input.builder().matrix(matrix).fitnessToFind(-1).build());
+        final Throwable throwable = Assertions.catchThrowable(() -> Input.memeticInputBuilder().matrix(matrix).fitnessToFind(-1).build());
 
         assertThat(throwable.getMessage()).isEqualTo("fitnessToFind cannot be less than 0");
     }
 
     @Test
     public void mustShowTheMatrix(){
-        Input.builder().build().showMatrix();
+        Input.memeticInputBuilder().build().showMatrix();
     }
 }

@@ -1,8 +1,9 @@
-package algorithms.heuristic.aid;
+package algorithms.heuristic.memetic.input;
 
+import algorithms.heuristic.aid.Input;
 import algorithms.heuristic.aid.matrix.MatricesGeneratorV2;
 
-public class InputBuilder {
+public class MemeticInputBuilder {
 
     static Integer DEFAULT_SIZE_OF_MARIX = 100;
     static Integer DEFAULT_SIZE_OF_FIRST_POPULATION = 2;
@@ -12,25 +13,25 @@ public class InputBuilder {
     private Integer fitnessToFind;
     private Integer sizeOfFirstGeneration = DEFAULT_SIZE_OF_FIRST_POPULATION;
 
-    public InputBuilder() {
+    public MemeticInputBuilder() {
     }
 
-    public InputBuilder matrix(int[][] matrix) {
+    public MemeticInputBuilder matrix(int[][] matrix) {
         this.matrix = matrix.clone();
         return this;
     }
 
-    public InputBuilder fitnessToFind(Integer fitnessToFind) {
+    public MemeticInputBuilder fitnessToFind(Integer fitnessToFind) {
         this.fitnessToFind = fitnessToFind;
         return this;
     }
 
-    public InputBuilder sizeOfFirstGeneration(Integer sizeOfFirstGeneration) {
+    public MemeticInputBuilder sizeOfFirstGeneration(Integer sizeOfFirstGeneration) {
         this.sizeOfFirstGeneration = sizeOfFirstGeneration;
         return this;
     }
 
-    public InputBuilder firstGeneration(int[][] firstGeneration) {
+    public MemeticInputBuilder firstGeneration(int[][] firstGeneration) {
         this.firstGeneration = new int[firstGeneration.length][];
         for (int g = 0; g < this.firstGeneration.length; g++) {
             this.firstGeneration[g] = firstGeneration[g].clone();
@@ -47,7 +48,7 @@ public class InputBuilder {
         if (firstGeneration == null) {
             firstGeneration = MatricesGeneratorV2.generateRandomPopulation(matrix, sizeOfFirstGeneration);
         }
-        final Input input = new Input(matrix);
+        final Input input = new MemeticInput(matrix);
         input.setSizeOfFirstGeneration(sizeOfFirstGeneration);
         input.setFirstGeneration(firstGeneration);
         input.setFitnessToFind(fitnessToFind);

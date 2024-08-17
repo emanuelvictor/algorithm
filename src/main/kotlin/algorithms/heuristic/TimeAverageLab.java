@@ -1,6 +1,6 @@
 package algorithms.heuristic;
 
-import algorithms.heuristic.aid.Input;
+import algorithms.heuristic.memetic.input.MemeticInput;
 import algorithms.heuristic.aid.Output;
 import algorithms.heuristic.aid.matrix.MatricesGeneratorV2;
 import algorithms.heuristic.memetic.v1.MemeticV1;
@@ -35,7 +35,7 @@ public class TimeAverageLab {
 
         for (int i = 1; i <= 40; i++) {
             EXECUTOR_SERVICE.submit(() -> {
-                var input = Input.builder()
+                var input = MemeticInput.builder()
                         .matrix(matrix)
                         .firstGeneration(rawFirstGeneration)
                         .fitnessToFind(fitness)
@@ -46,7 +46,7 @@ public class TimeAverageLab {
                 printRun(durationsFromOOMemetic, durationsFromStructuredMemetic, durationsFromOldStructuredMemetic);
             });
             EXECUTOR_SERVICE.submit(() -> {
-                var input = Input.builder()
+                var input = MemeticInput.builder()
                         .matrix(matrix)
                         .firstGeneration(rawFirstGeneration)
                         .fitnessToFind(fitness)
@@ -57,7 +57,7 @@ public class TimeAverageLab {
                 printRun(durationsFromOOMemetic, durationsFromStructuredMemetic, durationsFromOldStructuredMemetic);
             });
             EXECUTOR_SERVICE.submit(() -> {
-                var input = Input.builder()
+                var input = MemeticInput.builder()
                         .matrix(matrix)
                         .firstGeneration(rawFirstGeneration)
                         .fitnessToFind(fitness)
