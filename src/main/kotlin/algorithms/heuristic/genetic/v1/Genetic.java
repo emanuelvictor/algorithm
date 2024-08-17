@@ -4,6 +4,7 @@ package algorithms.heuristic.genetic.v1;
 
 
 import algorithms.heuristic.aid.matrix.MatrixGenerator;
+import kotlin.Deprecated;
 import org.springframework.util.Assert;
 
 import java.util.Arrays;
@@ -14,6 +15,7 @@ import java.util.Random;
  * Análise da influencia da mutação nos crossovers OX e PMX.
  * Algoritmo
  */
+@Deprecated(message = "Utilize GeneticV1")
 public class Genetic {
 
     private final int[][] matrix;
