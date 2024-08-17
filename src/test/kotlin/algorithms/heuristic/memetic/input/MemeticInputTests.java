@@ -10,7 +10,7 @@ public class MemeticInputTests {
 
     @Test
     public void mustCreateInputWithDefaultValues() {
-        final Input input = Input.memeticInputBuilder().build();
+        final Input input = MemeticInput.builder().build();
 
         assertThat(input.getFitnessToFind()).isNotNull();
         assertThat(input.getFirstGeneration()).isNotNull();
@@ -21,7 +21,7 @@ public class MemeticInputTests {
     public void mustCreateInputWithCustomMatrixAndWithoutFitnessToFind() {
         final int[][] matrix = new int[][]{{1, 2, 3}, {1, 2, 3}, {1, 2, 3}};
 
-        final Input input = Input.memeticInputBuilder().matrix(matrix).build();
+        final Input input = MemeticInput.builder().matrix(matrix).build();
 
         assertThat(input.getFitnessToFind()).isNull();
         assertThat(input.getFirstGeneration()).isNotNull();
@@ -35,7 +35,7 @@ public class MemeticInputTests {
         final int sizeOfFirstPopulation = 3;
         final int[][] firstPopulation = new int[][]{{1, 2, 3}, {1, 2, 3}, {1, 2, 3}};
 
-        final Input input = Input.memeticInputBuilder()
+        final Input input = MemeticInput.builder()
                 .matrix(matrix)
                 .fitnessToFind(fitnessToFind)
                 .sizeOfFirstGeneration(sizeOfFirstPopulation)
@@ -54,7 +54,7 @@ public class MemeticInputTests {
         final int fitnessToFind = 3;
         final int[][] firstPopulation = new int[][]{{1, 2, 3}, {1, 2, 3, 4}, {1, 2, 3}};
 
-        final Throwable throwable = Assertions.catchThrowable(() -> Input.memeticInputBuilder()
+        final Throwable throwable = Assertions.catchThrowable(() -> MemeticInput.builder()
                 .matrix(matrix).fitnessToFind(fitnessToFind).firstGeneration(firstPopulation)
                 .build());
 
@@ -66,7 +66,7 @@ public class MemeticInputTests {
     public void inputCannotBeCreatedWithFitnessToFindEqualsToZero() {
         final int[][] matrix = new int[][]{{1, 2, 3}, {1, 2, 3}, {1, 2, 3}};
 
-        final Throwable throwable = Assertions.catchThrowable(() -> Input.memeticInputBuilder().matrix(matrix).fitnessToFind(0).build());
+        final Throwable throwable = Assertions.catchThrowable(() -> MemeticInput.builder().matrix(matrix).fitnessToFind(0).build());
 
         assertThat(throwable.getMessage()).isEqualTo("fitnessToFind cannot be less than 0");
     }
@@ -76,13 +76,13 @@ public class MemeticInputTests {
     public void inputCannotBeCreatedWithFitnessToFindLessThanZero() {
         final int[][] matrix = new int[][]{{1, 2, 3}, {1, 2, 3}, {1, 2, 3}};
 
-        final Throwable throwable = Assertions.catchThrowable(() -> Input.memeticInputBuilder().matrix(matrix).fitnessToFind(-1).build());
+        final Throwable throwable = Assertions.catchThrowable(() -> MemeticInput.builder().matrix(matrix).fitnessToFind(-1).build());
 
         assertThat(throwable.getMessage()).isEqualTo("fitnessToFind cannot be less than 0");
     }
 
     @Test
     public void mustShowTheMatrix(){
-        Input.memeticInputBuilder().build().showMatrix();
+        MemeticInput.builder().build().showMatrix();
     }
 }

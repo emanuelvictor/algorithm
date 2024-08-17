@@ -49,10 +49,6 @@ public class MemeticInput implements Input {
         this.sizeOfFirstGeneration = sizeOfFirstGeneration;
     }
 
-    public void showMatrix() {
-        showMatrix(matrix);
-    }
-
     public static MemeticInputBuilder builder() {
         return new MemeticInputBuilder();
     }
@@ -69,25 +65,7 @@ public class MemeticInput implements Input {
             }
     }
 
-    public static void showMatrix(final int[][] matrix) {
-        for (int i = 0; i < matrix.length; i++) {
-            if (i == 0)
-                System.out.print("{");
-            for (int g = 0; g < matrix[i].length; g++) {
-
-                System.out.print((g == 0 ? "{" : ""));
-                if (matrix[i][g] < 10)
-                    System.out.print("  " + matrix[i][g]);
-                else if (matrix[i][g] < 100 && matrix[i][g] >= 10)
-                    System.out.print(" " + matrix[i][g]);
-                else if (matrix[i][g] < 1000 && matrix[i][g] >= 100)
-                    System.out.print(matrix[i][g]);
-                System.out.print((g == matrix[i].length - 1 ? "}" + (i == matrix.length - 1 ? "" : ",") : ","));
-            }
-            if (i == matrix.length - 1)
-                System.out.println("};");
-            System.out.println();
-        }
+    public void showMatrix() {
+        showMatrix(matrix);
     }
-
 }
