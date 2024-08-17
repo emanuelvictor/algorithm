@@ -1,4 +1,4 @@
-package algorithms.heuristic.memetic.oo.models;
+package algorithms.heuristic.memetic.v3.models;
 
 public class Generation {
 

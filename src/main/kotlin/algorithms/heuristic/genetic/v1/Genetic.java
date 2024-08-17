@@ -1,9 +1,9 @@
 
 
-package algorithms.heuristic.genetic.structured;
+package algorithms.heuristic.genetic.v1;
 
 
-import algorithms.heuristic.matrix.MatrixGenerator;
+import algorithms.heuristic.aid.matrix.MatrixGenerator;
 import org.springframework.util.Assert;
 
 import java.util.Arrays;

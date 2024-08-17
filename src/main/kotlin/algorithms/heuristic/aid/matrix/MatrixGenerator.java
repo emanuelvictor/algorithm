@@ -1,4 +1,6 @@
-package algorithms.heuristic.matrix;
+package algorithms.heuristic.aid.matrix;
+
+import kotlin.Deprecated;
 
 import java.util.Random;
 
@@ -7,6 +9,7 @@ import java.util.Random;
  * Análise da influencia da mutação nos crossovers OX e PMX.
  * Matrixes analisadas
  */
+@Deprecated(message = "Use MatrixGeneratorV2")
 public final class MatrixGenerator {
 
     private static boolean PRINT_MATRIX = false;

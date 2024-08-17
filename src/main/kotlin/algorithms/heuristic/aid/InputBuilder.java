@@ -1,6 +1,6 @@
-package algorithms.heuristic;
+package algorithms.heuristic.aid;
 
-import algorithms.heuristic.matrix.MatricesGeneratorV2;
+import algorithms.heuristic.aid.matrix.MatricesGeneratorV2;
 
 public class InputBuilder {
 

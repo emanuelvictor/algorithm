@@ -1,6 +1,4 @@
-package algorithms.heuristic.memetic.oo.models;
-
-import algorithms.heuristic.Utils;
+package algorithms.heuristic.memetic.v3.models;
 
 public class Individual {
 

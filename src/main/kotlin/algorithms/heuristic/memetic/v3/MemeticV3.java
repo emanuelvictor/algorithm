@@ -1,24 +1,24 @@
-package algorithms.heuristic.memetic.oo;
+package algorithms.heuristic.memetic.v3;
 
-import algorithms.heuristic.Algorithm;
-import algorithms.heuristic.Input;
-import algorithms.heuristic.Output;
-import algorithms.heuristic.memetic.oo.models.Generation;
-import algorithms.heuristic.memetic.oo.models.Individual;
+import algorithms.heuristic.aid.Algorithm;
+import algorithms.heuristic.aid.Input;
+import algorithms.heuristic.aid.Output;
+import algorithms.heuristic.memetic.v3.models.Generation;
+import algorithms.heuristic.memetic.v3.models.Individual;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import static algorithms.heuristic.Utils.*;
+import static algorithms.heuristic.aid.Utils.*;
 
-public class OOMemetic implements Algorithm {
+public class MemeticV3 implements Algorithm {
 
     private final int[][] matrix;
     private final Generation generation;
     private final int fitnessToFind;
     private final LocalDateTime initDate = LocalDateTime.now();
 
-    public OOMemetic(final Input input) {
+    public MemeticV3(final Input input) {
         this.matrix = input.getMatrix();
         this.fitnessToFind = input.getFitnessToFind();
         this.generation = new Generation(input.getFirstGeneration(), matrix);

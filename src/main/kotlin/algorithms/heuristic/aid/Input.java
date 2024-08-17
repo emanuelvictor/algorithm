@@ -1,4 +1,4 @@
-package algorithms.heuristic;
+package algorithms.heuristic.aid;
 
 import org.springframework.util.Assert;
 

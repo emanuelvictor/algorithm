@@ -1,5 +1,6 @@
 package algorithms.heuristic.matrix;
 
+import algorithms.heuristic.aid.matrix.MatrixGenerator;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
 

@@ -1,23 +1,23 @@
-package algorithms.heuristic.memetic.structured;
+package algorithms.heuristic.memetic.v2;
 
 
-import algorithms.heuristic.Algorithm;
-import algorithms.heuristic.Input;
-import algorithms.heuristic.Output;
+import algorithms.heuristic.aid.Algorithm;
+import algorithms.heuristic.aid.Input;
+import algorithms.heuristic.aid.Output;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import static algorithms.heuristic.Utils.*;
+import static algorithms.heuristic.aid.Utils.*;
 
-public class StructuredMemetic implements Algorithm {
+public class MemeticV2 implements Algorithm {
 
     private final int[][] matrix;
     private final int[][] generation;
     private final int fitnessToFind;
     private final LocalDateTime initDate = LocalDateTime.now();
 
-    public StructuredMemetic(final Input input) {
+    public MemeticV2(final Input input) {
         this.matrix = input.getMatrix();
         this.fitnessToFind = input.getFitnessToFind();
         this.generation = input.getFirstGeneration();

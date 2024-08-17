@@ -1,15 +1,15 @@
-package algorithms.heuristic.memetic.structured;
+package algorithms.heuristic.memetic.v1;
 
-import algorithms.heuristic.Algorithm;
-import algorithms.heuristic.Input;
-import algorithms.heuristic.Output;
+import algorithms.heuristic.aid.Algorithm;
+import algorithms.heuristic.aid.Input;
+import algorithms.heuristic.aid.Output;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import static algorithms.heuristic.Utils.*;
+import static algorithms.heuristic.aid.Utils.*;
 
-public class OldStructuredMemetic implements Algorithm {
+public class MemeticV1 implements Algorithm {
 
     private final LocalDateTime initDate = LocalDateTime.now();
     private final int[][] matrix;
@@ -19,7 +19,7 @@ public class OldStructuredMemetic implements Algorithm {
     private int[] melhor;
 
 
-    public OldStructuredMemetic(final Input input) {
+    public MemeticV1(final Input input) {
         this.matrix = input.getMatrix();
         this.fitnessToFind = input.getFitnessToFind();
         this.generation = input.getFirstGeneration();

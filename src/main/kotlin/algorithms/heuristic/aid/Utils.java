@@ -1,4 +1,4 @@
-package algorithms.heuristic;
+package algorithms.heuristic.aid;
 
 import java.util.Arrays;
 import java.util.Random;
