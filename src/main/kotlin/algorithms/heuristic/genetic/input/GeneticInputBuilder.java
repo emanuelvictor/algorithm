@@ -5,8 +5,8 @@ import algorithms.heuristic.aid.matrix.MatricesGeneratorV2;
 
 public class GeneticInputBuilder {
 
-    static Integer DEFAULT_SIZE_OF_MARIX = 100;
-    static Integer DEFAULT_SIZE_OF_FIRST_POPULATION = 2;
+    static Integer DEFAULT_SIZE_OF_MATRIX = 100;
+    static Integer DEFAULT_SIZE_OF_FIRST_POPULATION = 3;
 
     private int[][] matrix;
     private int[][] firstGeneration;
@@ -41,7 +41,7 @@ public class GeneticInputBuilder {
 
     public Input build() {
         if (matrix == null) {
-            MatricesGeneratorV2 matricesGenerator = new MatricesGeneratorV2(DEFAULT_SIZE_OF_MARIX);
+            MatricesGeneratorV2 matricesGenerator = new MatricesGeneratorV2(DEFAULT_SIZE_OF_MATRIX);
             matrix = matricesGenerator.getMatrix();
             fitnessToFind = matricesGenerator.getFitness();
         }

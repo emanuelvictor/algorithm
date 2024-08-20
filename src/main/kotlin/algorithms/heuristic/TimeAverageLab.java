@@ -19,12 +19,14 @@ import java.util.concurrent.Executors;
  */
 public class TimeAverageLab {
 
-    private static final ExecutorService EXECUTOR_SERVICE = Executors.newFixedThreadPool(140);
+    private static final ExecutorService EXECUTOR_SERVICE = Executors.newFixedThreadPool(470);
 
     static List<Duration> durationsFromOOMemetic = new ArrayList<>();
     static List<Duration> durationsFromStructuredMemetic = new ArrayList<>();
     static List<Duration> durationsFromOldStructuredMemetic = new ArrayList<>();
-
+ // TODO precisamos de mais dados estatísticos como:
+    // Qual terminou a primeira execução primeiro.
+    // Qual teve a execução mais demorada e menos demorada.
     public static void main(String[] args) {
 
         printHeader();
@@ -33,35 +35,26 @@ public class TimeAverageLab {
         var rawFirstGeneration = MatricesGeneratorV2.generateRandomPopulation(matrix, 3);
         var fitness = MatricesGeneratorV2.extractTheBestFitnessFromSupervisedMatrix(matrix);
 
-        for (int i = 1; i <= 40; i++) {
+        var input = MemeticInput.builder()
+                .matrix(matrix)
+                .firstGeneration(rawFirstGeneration)
+                .fitnessToFind(fitness)
+                .build();
+
+        for (int i = 1; i <= 150; i++) {
             EXECUTOR_SERVICE.submit(() -> {
-                var input = MemeticInput.builder()
-                        .matrix(matrix)
-                        .firstGeneration(rawFirstGeneration)
-                        .fitnessToFind(fitness)
-                        .build();
                 final MemeticV3 memetic = new MemeticV3(input);
                 final Output output = memetic.execute();
                 durationsFromOOMemetic.add(output.getDuration());
                 printRun(durationsFromOOMemetic, durationsFromStructuredMemetic, durationsFromOldStructuredMemetic);
             });
             EXECUTOR_SERVICE.submit(() -> {
-                var input = MemeticInput.builder()
-                        .matrix(matrix)
-                        .firstGeneration(rawFirstGeneration)
-                        .fitnessToFind(fitness)
-                        .build();
                 final MemeticV1 memeticV1 = new MemeticV1(input);
                 final Output output = memeticV1.execute();
                 durationsFromOldStructuredMemetic.add(output.getDuration());
                 printRun(durationsFromOOMemetic, durationsFromStructuredMemetic, durationsFromOldStructuredMemetic);
             });
             EXECUTOR_SERVICE.submit(() -> {
-                var input = MemeticInput.builder()
-                        .matrix(matrix)
-                        .firstGeneration(rawFirstGeneration)
-                        .fitnessToFind(fitness)
-                        .build();
                 final MemeticV2 memeticV2 = new MemeticV2(input);
                 final Output output = memeticV2.execute();
                 durationsFromStructuredMemetic.add(output.getDuration());
