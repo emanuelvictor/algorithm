@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
 /**
  * Dedicated to compare OO Memetic Implementation and Structured Memetic Implementation
  */
-public class TimeAverageLab {
+public class TimeAverageOfExecutionLab {
 
     private static final ExecutorService EXECUTOR_SERVICE = Executors.newFixedThreadPool(470);
 
