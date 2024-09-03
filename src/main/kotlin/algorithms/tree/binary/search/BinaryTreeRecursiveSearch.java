@@ -39,4 +39,12 @@ public class BinaryTreeRecursiveSearch {
         }
         return arrayToReturn;
     }
+
+    final class TermCannotBeFound extends RuntimeException {
+
+        public TermCannotBeFound(String message) {
+            super(message);
+        }
+    }
+
 }

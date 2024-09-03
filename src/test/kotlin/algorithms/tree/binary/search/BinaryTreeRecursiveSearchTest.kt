@@ -29,11 +29,11 @@ class BinaryTreeRecursiveSearchTest {
         val tree = BinaryTreeRecursiveSearch(array)
 
         for (i in array.indices) {
-            val exception: Exception = assertThrows(TermCannotBeFound::class.java) {
+            val exception: Exception = assertThrows(BinaryTreeRecursiveSearch.TermCannotBeFound::class.java) {
                 tree.search(i + 1000)
             }
 
-            assertThat(exception).isInstanceOf(TermCannotBeFound::class.java)
+            assertThat(exception).isInstanceOf(BinaryTreeRecursiveSearch.TermCannotBeFound::class.java)
                 .hasMessageContaining(String.format(TERM_CANNOT_BE_FOUND_MESSAGE_ERROR, i + 1000))
         }
     }

@@ -1,8 +1,6 @@
 package algorithms.tree.binary.search
 
-import algorithms.tree.binary.search.BinaryTreeRecursiveSearch.TERM_CANNOT_BE_FOUND_MESSAGE_ERROR
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
