@@ -1,19 +1,22 @@
-package algorithms.tree.binary.search
+package algorithms.divideandconquer.binarysearch
 
+import algorithms.divideandconquer.binarysearch.BinaryRecursiveSearch.TERM_CANNOT_BE_FOUND_MESSAGE_ERROR
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class BinaryTreeRecursiveSearchReturningNegativeNumberIfNotFoundTermTest {
+class BinaryRecursiveSearchTest {
 
     @ParameterizedTest
     @MethodSource("getArraysToSearch")
     fun `Must search a term from array`(array: IntArray) {
-        val tree = BinaryTreeRecursiveSearchReturningNegativeNumberIfNotFoundTerm(array)
+        val tree = BinaryRecursiveSearch(array)
 
         for (i in array.indices) {
             assertThat(tree.search(i + 1)).isEqualTo(i);
@@ -22,11 +25,16 @@ class BinaryTreeRecursiveSearchReturningNegativeNumberIfNotFoundTermTest {
 
     @ParameterizedTest
     @MethodSource("getArraysToSearch")
-    fun `Must return -1 if cannot find a term`(array: IntArray) {
-        val tree = BinaryTreeRecursiveSearchReturningNegativeNumberIfNotFoundTerm(array)
+    fun `Must return an exception if cannot find a term`(array: IntArray) {
+        val tree = BinaryRecursiveSearch(array)
 
         for (i in array.indices) {
-            assertThat(tree.search(i + 1000)).isEqualTo(-1)
+            val exception: Exception = assertThrows(BinaryRecursiveSearch.TermCannotBeFound::class.java) {
+                tree.search(i + 1000)
+            }
+
+            assertThat(exception).isInstanceOf(BinaryRecursiveSearch.TermCannotBeFound::class.java)
+                .hasMessageContaining(String.format(TERM_CANNOT_BE_FOUND_MESSAGE_ERROR, i + 1000))
         }
     }
 
@@ -47,4 +55,3 @@ class BinaryTreeRecursiveSearchReturningNegativeNumberIfNotFoundTermTest {
         }
     }
 }
-

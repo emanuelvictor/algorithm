@@ -61,7 +61,6 @@ public class MemeticInputTests {
         assertThat(throwable.getMessage()).isEqualTo("The size of individuals from population must be equal to size of matrix");
     }
 
-    // TODO parametrized tests
     @Test
     public void inputCannotBeCreatedWithFitnessToFindEqualsToZero() {
         final int[][] matrix = new int[][]{{1, 2, 3}, {1, 2, 3}, {1, 2, 3}};
@@ -71,7 +70,6 @@ public class MemeticInputTests {
         assertThat(throwable.getMessage()).isEqualTo("fitnessToFind cannot be less than 0");
     }
 
-    // TODO parametrized tests
     @Test
     public void inputCannotBeCreatedWithFitnessToFindLessThanZero() {
         final int[][] matrix = new int[][]{{1, 2, 3}, {1, 2, 3}, {1, 2, 3}};

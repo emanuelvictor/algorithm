@@ -1,10 +1,10 @@
-package algorithms.tree.binary.search;
+package algorithms.divideandconquer.binarysearch;
 
-public class BinaryTreeRecursiveSearchReturningNegativeNumberIfNotFoundTerm {
+public class BinaryRecursiveSearchReturningNegativeNumberIfNotFoundTerm {
 
     private final int[] array;
 
-    BinaryTreeRecursiveSearchReturningNegativeNumberIfNotFoundTerm(int[] array) {
+    BinaryRecursiveSearchReturningNegativeNumberIfNotFoundTerm(int[] array) {
         this.array = array;
     }
 

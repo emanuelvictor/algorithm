@@ -1,12 +1,12 @@
-package algorithms.tree.binary.search;
+package algorithms.divideandconquer.binarysearch;
 
-public class BinaryTreeRecursiveSearch {
+public class BinaryRecursiveSearch {
 
     static final String TERM_CANNOT_BE_FOUND_MESSAGE_ERROR = "Term %s cannot be found";
 
     private final int[] array;
 
-    BinaryTreeRecursiveSearch(int[] array) {
+    BinaryRecursiveSearch(int[] array) {
         this.array = array;
     }
 
