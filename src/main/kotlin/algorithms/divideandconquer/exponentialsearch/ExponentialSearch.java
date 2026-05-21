@@ -19,9 +19,8 @@ public class ExponentialSearch {
 
     private int search(int value, final int[] array) {
         if (array[0] == value) return 0;
-        int n = array.length;
         int right = 1;
-        while (right < n && array[right] < value) {
+        while (right < array.length && array[right] < value) {
             // Avança o right
             right = right * 2;
         }
@@ -30,7 +29,7 @@ public class ExponentialSearch {
         var min = Math.min(right, array.length - 1);
 
         // Realiza a busca binária no array restante.
-        return binarySearch(value, array, right/2, min);
+        return binarySearch(value, array, right/2, array.length);
     }
 
     private int binarySearch(int value, final int[] array, int lo, int hi) {
