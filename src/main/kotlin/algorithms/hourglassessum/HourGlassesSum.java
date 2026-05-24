@@ -27,7 +27,7 @@ class HourGlassesSum {
                 }
             }
         }
-        return total;
+        return Objects.requireNonNull(total);
     }
 
     static int getSumFormHourGlass(int row, int column, List<List<Integer>> matrix) {
