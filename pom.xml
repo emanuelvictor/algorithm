@@ -13,7 +13,7 @@
         <kotlin.code.style>official</kotlin.code.style>
         <kotlin.compiler.jvmTarget>21</kotlin.compiler.jvmTarget>
         <spring-core.version>6.1.11</spring-core.version>
-        <assertj-core.version>3.26.3</assertj-core.version>
+        <assertj-core.version>3.27.7</assertj-core.version>
         <jacoco.version>0.8.5</jacoco.version>
 
         <java.version>21</java.version>
@@ -148,12 +148,6 @@
     </build>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring-core.version}</version>
-        </dependency>
-        <!-- runtime and test scoped -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>

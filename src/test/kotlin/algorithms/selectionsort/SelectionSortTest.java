@@ -4,6 +4,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.HashSet;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -38,21 +39,27 @@ public class SelectionSortTest {
     }
 
     public static int[] createBigArray() {
-        final var bigArray = new int[100000];
-        for (int i = 0; i < 100000; i++) {
-            bigArray[i] = 100000 - i;
+        return createArrayFromSize(100000);
+    }
+
+    public static int[] createArrayFromSize(int sizeOfArray) {
+        final var bigArray = new int[sizeOfArray];
+        for (int i = 0; i < sizeOfArray; i++) {
+            bigArray[i] = i;
         }
         return bigArray;
     }
 
-    public static int[] shuffleArray(final int[] array) {
-        for (int i = 0; i < array.length; i++) {
-            int random = new Random().nextInt(i, array.length);
+    public static int[] shuffleArray(int[] array) {
+        final int[] copy = new int[array.length];
+        System.arraycopy(array, 0, copy, 0, array.length);
+        for (int i = 1; i < copy.length; i++) {
 
-            int aux = array[i];
-            array[i] = array[random];
-            array[random] = aux;
+            int random = new Random().nextInt(0, i);
+            int aux = copy[random];
+            copy[random] = copy[i];
+            copy[i] = aux;
         }
-        return array;
+        return copy;
     }
 }

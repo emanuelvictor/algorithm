@@ -1,7 +1,6 @@
 package algorithms.heuristic.memetic.input;
 
 import algorithms.heuristic.aid.Input;
-import org.springframework.util.Assert;
 
 public class MemeticInput implements Input {
 
@@ -55,13 +54,15 @@ public class MemeticInput implements Input {
 
     private static void validateFitnessToFind(Integer fitnessToFind) {
         if (fitnessToFind != null)
-            Assert.isTrue(fitnessToFind > 0, "fitnessToFind cannot be less than 0");
+            if (fitnessToFind <= 0)
+                throw new RuntimeException("fitnessToFind cannot be less than 0");
     }
 
     private static void validateSizeOfFirstGeneration(int[][] generation, int[][] matrix) {
         if (generation != null)
-            for (int i = 0; i < generation.length; i++) {
-                Assert.isTrue(generation[i].length == matrix.length, "The size of individuals from population must be equal to size of matrix");
+            for (int[] ints : generation) {
+                if (ints.length != matrix.length)
+                    throw new RuntimeException("The size of individuals from population must be equal to size of matrix");
             }
     }
 

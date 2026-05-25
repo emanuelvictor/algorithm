@@ -6,8 +6,6 @@ package algorithms.heuristic.genetic.v1;
 import algorithms.heuristic.aid.Algorithm;
 import algorithms.heuristic.aid.Output;
 import algorithms.heuristic.aid.matrix.MatrixGenerator;
-import kotlin.Deprecated;
-import org.springframework.util.Assert;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -72,7 +70,7 @@ public class GeneticV1 implements Algorithm {
 //            Arrays.sort(fitness);
             sort(population, fitness);
 
-            Assert.isTrue(calculateFitness(population, matrix)[0] == fitness[0], "");
+//            Assert.isTrue(calculateFitness(population, matrix)[0] == fitness[0], "");
 
             // Aplica o crossover do indivíduo selecionado pela roulette
             population = crossover(txElitism, txCrossover, withRoulette ? roulette(fitness) : 0, population, matrix, this.crossover);

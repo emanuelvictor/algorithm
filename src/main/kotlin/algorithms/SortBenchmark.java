@@ -1,5 +1,7 @@
 package algorithms;
 
+import algorithms.binarytree.BinaryTree;
+import algorithms.binarytree.oo.BinaryTreeWithOO;
 import algorithms.insertionsort.ClassicInsertionSort;
 import algorithms.insertionsort.MyInsertionSort;
 import algorithms.selectionsort.SelectionSort;
@@ -66,6 +68,24 @@ public class SortBenchmark {
     public void benchmarkSelectionSort(Blackhole bh) {
         int[] arr = copyArray();
         SelectionSort.execute(arr);
+        bh.consume(arr);
+    }
+
+    @Benchmark
+    @BenchmarkMode(Mode.AverageTime)
+    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    public void benchmarkBinaryTree(Blackhole bh) {
+        int[] arr = copyArray();
+        BinaryTreeWithOO.executeAndReturnInOrderTraversal(arr);
+        bh.consume(arr);
+    }
+
+    @Benchmark
+    @BenchmarkMode(Mode.AverageTime)
+    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    public void benchmarkBinaryTreeWithOO(Blackhole bh) {
+        int[] arr = copyArray();
+        BinaryTree.executeAndReturnInOrderTraversal(arr);
         bh.consume(arr);
     }
 }

@@ -2,7 +2,6 @@ package algorithms.heuristic.genetic.input;
 
 import algorithms.heuristic.aid.Input;
 import algorithms.heuristic.genetic.v1.Crossover;
-import org.springframework.util.Assert;
 
 public class GeneticInput implements Input {
 
@@ -113,14 +112,15 @@ public class GeneticInput implements Input {
     }
 
     private static void validateFitnessToFind(Integer fitnessToFind) {
-        if (fitnessToFind != null)
-            Assert.isTrue(fitnessToFind > 0, "fitnessToFind cannot be less than 0");
+        if (fitnessToFind != null && fitnessToFind <= 0)
+            throw new RuntimeException("fitnessToFind cannot be less than 0");
     }
 
     private static void validateSizeOfFirstGeneration(int[][] generation, int[][] matrix) {
         if (generation != null)
             for (int i = 0; i < generation.length; i++) {
-                Assert.isTrue(generation[i].length == matrix.length, "The size of individuals from population must be equal to size of matrix");
+                if (generation[i].length != matrix.length)
+                    throw new RuntimeException("The size of individuals from population must be equal to size of matrix");
             }
     }
 }

@@ -2,7 +2,8 @@ package algorithms.heuristic.matrix;
 
 import algorithms.heuristic.aid.matrix.MatrixGenerator;
 import org.junit.jupiter.api.Test;
-import org.springframework.util.Assert;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class MatricesGeneratorV2Tests {
 
@@ -14,15 +15,15 @@ public class MatricesGeneratorV2Tests {
     @Test
     public void mustGenerateRandomRoute() {
         final int[] array = MatrixGenerator.getInstance().generateRandomRoute(100);
-        Assert.isTrue(!isOrdering(array), "Is not random");
-        Assert.isTrue(isRandom(array), "Is not random");
+        assertThat(isOrdering(array)).isFalse();
+        assertThat(isRandom(array)).isTrue();
     }
 
     @Test
     public void mustGenerateOrderingRoute() {
         final int[] array = MatrixGenerator.getInstance().generateOrderingRoute(100);
-        Assert.isTrue(isOrdering(array), "Is random");
-        Assert.isTrue(!isRandom(array), "Is random");
+        assertThat(isOrdering(array)).isTrue();
+        assertThat(isRandom(array)).isFalse();
     }
 
     private boolean isRandom(final int[] array) {
