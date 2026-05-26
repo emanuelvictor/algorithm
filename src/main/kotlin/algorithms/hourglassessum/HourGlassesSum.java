@@ -1,10 +1,8 @@
 package algorithms.hourglassessum;
 
 
-import java.io.IOException;
-import java.util.*;
-
-import static java.util.stream.Collectors.joining;
+import java.util.List;
+import java.util.Objects;
 
 class HourGlassesSum {
 

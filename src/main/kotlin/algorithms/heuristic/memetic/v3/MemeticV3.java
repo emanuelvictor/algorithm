@@ -9,7 +9,8 @@ import algorithms.heuristic.memetic.v3.models.Individual;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import static algorithms.heuristic.aid.Utils.*;
+import static algorithms.heuristic.aid.Utils.calculateFitness;
+import static algorithms.heuristic.aid.Utils.shuffle;
 
 public class MemeticV3 implements Algorithm {
 

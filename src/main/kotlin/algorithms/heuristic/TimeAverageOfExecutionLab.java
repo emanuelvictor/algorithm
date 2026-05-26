@@ -1,8 +1,8 @@
 package algorithms.heuristic;
 
-import algorithms.heuristic.memetic.input.MemeticInput;
 import algorithms.heuristic.aid.Output;
 import algorithms.heuristic.aid.matrix.MatricesGeneratorV2;
+import algorithms.heuristic.memetic.input.MemeticInput;
 import algorithms.heuristic.memetic.v1.MemeticV1;
 import algorithms.heuristic.memetic.v2.MemeticV2;
 import algorithms.heuristic.memetic.v3.MemeticV3;

@@ -1,7 +1,5 @@
-package algorithms.binarytree;
+package algorithms.bubblesort;
 
-import algorithms.binarytree.oo.BinaryTreeWithOO;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -12,35 +10,16 @@ import static algorithms.sortbenchmark.Stub.createBigArray;
 import static algorithms.sortbenchmark.Stub.shuffleArray;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-public class BinaryTreeWithOOTests {
+public class BubbleSortTest {
+
 
     @ParameterizedTest
     @MethodSource("provideShuffleAndSortedArray")
-    public void mustExecuteAndReturnPreOrderTraversalArray(final int[] arrayToSort, final int[] expectedSortedArray) {
+    public void mustSortArray(final int[] arrayToSort, final int[] expectedSortedArray) {
 
-        final var sortedArray = BinaryTreeWithOO.executeAndReturnInOrderTraversal(arrayToSort);
+        final var selectionSorted = BubbleSort.execute(arrayToSort);
 
-        assertArrayEquals(expectedSortedArray, sortedArray);
-    }
-
-    @Test
-    public void mustRunTreeInPreOrderTraversal() {
-        final var arrayToSort = new int[]{5, 3, 1, 10, 7, 15};
-        final var preOrderedArrayExpected = new int[]{5, 3, 1, 10, 7, 15};
-
-        final var arrayReturned = BinaryTreeWithOO.executeAndReturnPreOrderTraversal(arrayToSort);
-
-        assertArrayEquals(preOrderedArrayExpected, arrayReturned);
-    }
-
-    @Test
-    public void mustRunTreeInPostOrderTraversal() {
-        final var arrayToSort = new int[]{5, 3, 1, 10, 7, 15};
-        final var postOrderedArrayExpected = new int[]{1, 3, 7, 15, 10, 5};
-
-        final var arrayReturned = BinaryTreeWithOO.executeAndReturnPostOrderTraversal(arrayToSort);
-
-        assertArrayEquals(postOrderedArrayExpected, arrayReturned);
+        assertArrayEquals(expectedSortedArray, selectionSorted);
     }
 
     static Stream<Arguments> provideShuffleAndSortedArray() {
@@ -48,7 +27,7 @@ public class BinaryTreeWithOOTests {
         final var shuffledBigArray = shuffleArray(sortedBigArray);
         return Stream.of(
                 Arguments.of(new int[]{1, 1, 1, 1}, new int[]{1, 1, 1, 1}),
-                Arguments.of(new int[]{1, 1, 3, 6, 1}, new int[]{1, 1, 1, 3, 6}),
+                Arguments.of(new int[]{1, 1, 3, 6,1}, new int[]{1, 1,1, 3, 6}),
                 Arguments.of(new int[]{64, 25, 12, 3, 22, 11, 1, 2, 4, 5, 6}, new int[]{1, 2, 3, 4, 5, 6, 11, 12, 22, 25, 64}),
                 Arguments.of(new int[]{64, 25, 12, 22, 11}, new int[]{11, 12, 22, 25, 64}),
                 Arguments.of(new int[]{5, 4, 3, 2, 1}, new int[]{1, 2, 3, 4, 5}),
@@ -59,6 +38,7 @@ public class BinaryTreeWithOOTests {
                 Arguments.of(new int[]{-64, -25, 0, -222, -11}, new int[]{-222, -64, -25, -11, 0}),
                 Arguments.of(new int[]{-64, -25, -222, -11}, new int[]{-222, -64, -25, -11}),
                 Arguments.of(new int[]{-64, -25, -222, -11, 118}, new int[]{-222, -64, -25, -11, 118}),
+                Arguments.of(sortedBigArray, sortedBigArray),
                 Arguments.of(shuffledBigArray, sortedBigArray)
         );
     }

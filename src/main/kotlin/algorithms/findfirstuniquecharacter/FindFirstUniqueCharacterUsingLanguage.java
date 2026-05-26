@@ -1,6 +1,8 @@
 package algorithms.findfirstuniquecharacter;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class FindFirstUniqueCharacterUsingLanguage {
 

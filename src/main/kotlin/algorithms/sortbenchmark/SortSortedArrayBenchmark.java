@@ -1,53 +1,38 @@
-package algorithms;
+package algorithms.sortbenchmark;
 
 import algorithms.binarytree.BinaryTree;
 import algorithms.binarytree.oo.BinaryTreeWithOO;
+import algorithms.bubblesort.BubbleSort;
 import algorithms.insertionsort.ClassicInsertionSort;
 import algorithms.insertionsort.MyInsertionSort;
 import algorithms.selectionsort.SelectionSort;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 
-import java.util.concurrent.TimeUnit;
-import java.util.Random;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
+
+import static algorithms.sortbenchmark.Stub.createBigArray;
 
 @State(Scope.Benchmark)
-public class SortBenchmark {
+public class SortSortedArrayBenchmark {
 
-    private int[] baseArray;
-    private static final int SIZE = 10000;
+    private int[] arrayToSort;
 
     @Setup(Level.Trial)
     public void setUp() {
-        baseArray = new int[SIZE];
-        for (int i = 0; i < SIZE; i++) {
-            baseArray[i] = i;
-        }
-        Random rnd = new Random(123);
-        for (int i = SIZE - 1; i > 0; i--) {
-            int j = rnd.nextInt(i + 1);
-            int t = baseArray[i];
-            baseArray[i] = baseArray[j];
-            baseArray[j] = t;
-        }
+        arrayToSort = createBigArray();
     }
 
     private int[] copyArray() {
-        return Arrays.copyOf(baseArray, baseArray.length);
+        return Arrays.copyOf(arrayToSort, arrayToSort.length);
     }
+
 
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void benchmarkClassicInsertionSort(Blackhole bh) {
+    public void classicInsertionSort(Blackhole bh) {
         int[] arr = copyArray();
         ClassicInsertionSort.execute(arr);
         bh.consume(arr);
@@ -56,7 +41,7 @@ public class SortBenchmark {
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void benchmarkMyInsertionSort(Blackhole bh) {
+    public void myInsertionSort(Blackhole bh) {
         int[] arr = copyArray();
         MyInsertionSort.execute(arr);
         bh.consume(arr);
@@ -65,7 +50,7 @@ public class SortBenchmark {
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void benchmarkSelectionSort(Blackhole bh) {
+    public void selectionSort(Blackhole bh) {
         int[] arr = copyArray();
         SelectionSort.execute(arr);
         bh.consume(arr);
@@ -74,7 +59,7 @@ public class SortBenchmark {
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void benchmarkBinaryTree(Blackhole bh) {
+    public void binaryTree(Blackhole bh) {
         int[] arr = copyArray();
         BinaryTreeWithOO.executeAndReturnInOrderTraversal(arr);
         bh.consume(arr);
@@ -83,9 +68,18 @@ public class SortBenchmark {
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void benchmarkBinaryTreeWithOO(Blackhole bh) {
+    public void binaryTreeWithOO(Blackhole bh) {
         int[] arr = copyArray();
         BinaryTree.executeAndReturnInOrderTraversal(arr);
+        bh.consume(arr);
+    }
+
+    @Benchmark
+    @BenchmarkMode(Mode.AverageTime)
+    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    public void bubbleSort(Blackhole bh) {
+        int[] arr = copyArray();
+        BubbleSort.execute(arr);
         bh.consume(arr);
     }
 }

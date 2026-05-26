@@ -6,8 +6,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static algorithms.selectionsort.SelectionSortTest.createBigArray;
-import static algorithms.selectionsort.SelectionSortTest.shuffleArray;
+import static algorithms.sortbenchmark.Stub.createBigArray;
+import static algorithms.sortbenchmark.Stub.shuffleArray;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class ClassicInsertionSortTest {
@@ -37,6 +37,7 @@ public class ClassicInsertionSortTest {
                 Arguments.of(new int[]{-64, -25, 0, -222, -11}, new int[]{-222, -64, -25, -11, 0}),
                 Arguments.of(new int[]{-64, -25, -222, -11}, new int[]{-222, -64, -25, -11}),
                 Arguments.of(new int[]{-64, -25, -222, -11, 118}, new int[]{-222, -64, -25, -11, 118}),
+                Arguments.of(sortedBigArray, sortedBigArray),
                 Arguments.of(shuffledBigArray, sortedBigArray)
         );
     }

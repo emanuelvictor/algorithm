@@ -4,10 +4,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.HashSet;
-import java.util.Random;
 import java.util.stream.Stream;
 
+import static algorithms.sortbenchmark.Stub.createBigArray;
+import static algorithms.sortbenchmark.Stub.shuffleArray;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class SelectionSortTest {
@@ -34,32 +34,10 @@ public class SelectionSortTest {
                 Arguments.of(new int[]{-64, -25, 0, -222, -11}, new int[]{-222, -64, -25, -11, 0}),
                 Arguments.of(new int[]{-64, -25, -222, -11}, new int[]{-222, -64, -25, -11}),
                 Arguments.of(new int[]{-64, -25, -222, -11, 118}, new int[]{-222, -64, -25, -11, 118}),
+                Arguments.of(sortedBigArray, sortedBigArray),
                 Arguments.of(shuffledBigArray, sortedBigArray)
         );
     }
 
-    public static int[] createBigArray() {
-        return createArrayFromSize(100000);
-    }
 
-    public static int[] createArrayFromSize(int sizeOfArray) {
-        final var bigArray = new int[sizeOfArray];
-        for (int i = 0; i < sizeOfArray; i++) {
-            bigArray[i] = i;
-        }
-        return bigArray;
-    }
-
-    public static int[] shuffleArray(int[] array) {
-        final int[] copy = new int[array.length];
-        System.arraycopy(array, 0, copy, 0, array.length);
-        for (int i = 1; i < copy.length; i++) {
-
-            int random = new Random().nextInt(0, i);
-            int aux = copy[random];
-            copy[random] = copy[i];
-            copy[i] = aux;
-        }
-        return copy;
-    }
 }
