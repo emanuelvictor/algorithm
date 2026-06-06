@@ -1,10 +1,9 @@
 package algorithms.sortbenchmark;
 
-import algorithms.binarytree.BinaryTree;
-import algorithms.binarytree.oo.BinaryTreeWithOO;
 import algorithms.bubblesort.BubbleSort;
 import algorithms.insertionsort.ClassicInsertionSort;
 import algorithms.insertionsort.MyInsertionSort;
+import algorithms.selectionsort.MinMaxSelectionSort;
 import algorithms.selectionsort.SelectionSort;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
@@ -60,20 +59,29 @@ public class SortShuffledArrayBenchmark {
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void binaryTree(Blackhole bh) {
+    public void minMaxSelectionSort(Blackhole bh) {
         int[] arr = copyArray();
-        BinaryTreeWithOO.executeAndReturnInOrderTraversal(arr);
+        MinMaxSelectionSort.execute(arr);
         bh.consume(arr);
     }
 
-    @Benchmark
-    @BenchmarkMode(Mode.AverageTime)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void binaryTreeWithOO(Blackhole bh) {
-        int[] arr = copyArray();
-        BinaryTree.executeAndReturnInOrderTraversal(arr);
-        bh.consume(arr);
-    }
+//    @Benchmark
+//    @BenchmarkMode(Mode.AverageTime)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void binaryTree(Blackhole bh) {
+//        int[] arr = copyArray();
+//        BinaryTreeWithOO.executeAndReturnInOrderTraversal(arr);
+//        bh.consume(arr);
+//    }
+//
+//    @Benchmark
+//    @BenchmarkMode(Mode.AverageTime)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    public void binaryTreeWithOO(Blackhole bh) {
+//        int[] arr = copyArray();
+//        BinaryTree.executeAndReturnInOrderTraversal(arr);
+//        bh.consume(arr);
+//    }
 
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)

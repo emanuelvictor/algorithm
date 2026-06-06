@@ -5,7 +5,7 @@ import java.util.Random;
 public class Stub {
 
     public static int[] createBigArray() {
-        return createArrayFromSize(1000);
+        return createArrayFromSize(100000);
     }
 
     public static int[] createArrayFromSize(int sizeOfArray) {
